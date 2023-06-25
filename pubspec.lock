@@ -9,14 +9,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.10.0"
-  audio_manager:
-    dependency: "direct main"
-    description:
-      name: audio_manager
-      sha256: "6f26b61cc39e258619d0e1bc34500bb7f3926dcc4b6a8c7ea31b67c62381c931"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.8.2"
   bloc:
     dependency: "direct main"
     description:
@@ -97,19 +89,19 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.1.4"
+  flute_music_player:
+    dependency: "direct main"
+    description:
+      name: flute_music_player
+      sha256: "74c0797e55a551751b0e2029def278d2d32f912f84326659c56e9230e150e1f8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.6"
   flutter:
     dependency: "direct main"
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_audio_query:
-    dependency: "direct main"
-    description:
-      name: flutter_audio_query
-      sha256: ff56033cdddb7380873c5f4f4591145e2728b619bc9929ef5432f792cbad2987
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.3.5+6"
   flutter_bloc:
     dependency: "direct main"
     description:
@@ -126,21 +118,8 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.1"
-  flutter_plugin_android_lifecycle:
-    dependency: transitive
-    description:
-      name: flutter_plugin_android_lifecycle
-      sha256: f64fc84e913a3c225588724c811f5f6600562d17fc6f6cea7fda264fc93361ae
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.11"
   flutter_test:
     dependency: "direct dev"
-    description: flutter
-    source: sdk
-    version: "0.0.0"
-  flutter_web_plugins:
-    dependency: transitive
     description: flutter
     source: sdk
     version: "0.0.0"
