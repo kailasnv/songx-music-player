@@ -1,12 +1,10 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:songx/presentation/pages/player_page/player_screen.dart';
 import 'package:songx/presentation/state_managment/theme_state/theme_cubit.dart';
 
-class BottomSongPlayer extends StatelessWidget {
-  const BottomSongPlayer({super.key});
+class BottomNowPlayingTile extends StatelessWidget {
+  const BottomNowPlayingTile({super.key});
 
   @override
   Widget build(BuildContext context) {

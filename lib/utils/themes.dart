@@ -12,7 +12,8 @@ class ThemeColors {
   // light theme
   static final lightTheme = ThemeData(
     // scaffold
-    scaffoldBackgroundColor: Colors.grey.shade200,
+    scaffoldBackgroundColor: const Color.fromARGB(255, 30, 222, 152),
+    primaryColor: Colors.black,
     // appbar
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.transparent,
@@ -38,7 +39,8 @@ class ThemeColors {
    */
   static final darkTheme = ThemeData(
     //scaffold
-    scaffoldBackgroundColor: Colors.black,
+    scaffoldBackgroundColor: const Color.fromARGB(255, 2, 39, 26),
+    primaryColor: Colors.white,
     // appbar
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.transparent,
@@ -49,6 +51,7 @@ class ThemeColors {
     textTheme: const TextTheme(
       bodySmall: TextStyle(color: Colors.white),
       bodyMedium: TextStyle(color: Colors.white),
+      titleMedium: TextStyle(color: Colors.white),
     ),
     // tab bar
     tabBarTheme: const TabBarTheme(

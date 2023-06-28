@@ -1,6 +1,17 @@
 part of 'songs_bloc.dart';
 
-@immutable
-abstract class SongsState {}
+class SongsState {
+  final bool isLoading;
+  final List<SongModel>? songModalList;
+  final SongModel? currentSong;
 
-class SongsInitial extends SongsState {}
+  SongsState({
+    required this.isLoading,
+    this.songModalList,
+    this.currentSong,
+  });
+}
+
+class SongsInitial extends SongsState {
+  SongsInitial({required super.isLoading});
+}

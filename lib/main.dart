@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:songx/presentation/pages/homepage/home_screen.dart';
+import 'package:songx/presentation/state_managment/songs_bloc/songs_bloc.dart';
 import 'package:songx/presentation/state_managment/theme_state/theme_cubit.dart';
 import 'package:songx/utils/themes.dart';
 
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => ThemeCubit()),
+        BlocProvider(create: (context) => SongsBloc()),
       ],
       child: BlocBuilder<ThemeCubit, ThemeState>(
         builder: (context, state) {
