@@ -13,7 +13,7 @@ class ThemeColors {
   static final lightTheme = ThemeData(
     // scaffold
     scaffoldBackgroundColor: const Color.fromARGB(255, 30, 222, 152),
-    primaryColor: Colors.black,
+    primarySwatch: Colors.green,
     // appbar
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.transparent,
@@ -32,6 +32,8 @@ class ThemeColors {
           border: Border(bottom: BorderSide(color: Colors.black))),
     ),
     iconTheme: const IconThemeData(color: Colors.black),
+    // border color
+    primaryColor: Colors.black.withOpacity(0.3),
   );
 
   /*
@@ -39,8 +41,9 @@ class ThemeColors {
    */
   static final darkTheme = ThemeData(
     //scaffold
-    scaffoldBackgroundColor: const Color.fromARGB(255, 2, 39, 26),
-    primaryColor: Colors.white,
+    scaffoldBackgroundColor: Colors.black,
+    primarySwatch: Colors.red,
+
     // appbar
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.transparent,
@@ -57,9 +60,11 @@ class ThemeColors {
     tabBarTheme: const TabBarTheme(
       labelColor: Colors.white,
       indicatorColor: Colors.white,
-      indicator: BoxDecoration(
-          border: Border(bottom: BorderSide(color: Colors.yellow))),
+      indicator:
+          BoxDecoration(border: Border(bottom: BorderSide(color: Colors.red))),
     ),
     iconTheme: const IconThemeData(color: Colors.white),
+    // border color
+    primaryColor: Colors.red,
   );
 }

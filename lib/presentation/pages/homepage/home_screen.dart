@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:just_audio/just_audio.dart';
 import 'package:on_audio_query/on_audio_query.dart';
+import 'package:provider/provider.dart';
 import 'package:songx/presentation/pages/homepage/widgets/albums.dart';
 import 'package:songx/presentation/pages/homepage/widgets/artists.dart';
 import 'package:songx/presentation/pages/homepage/widgets/playlists.dart';
 import 'package:songx/presentation/pages/homepage/widgets/tracks.dart';
+import 'package:just_audio/just_audio.dart';
+import 'package:songx/presentation/state_managment/player_provider/audio_player_prov.dart';
 
 import '../../../utils/permission.dart';
 import '../../state_managment/songs_bloc/songs_bloc.dart';
@@ -31,7 +33,8 @@ class _HomeScreenState extends State<HomeScreen> {
     requestStoragePermission(_audioQuery);
     BlocProvider.of<SongsBloc>(context)
         .add(FetchAllSongsEvent(audioQuery: _audioQuery));
-
+    // init the audio player
+    Provider.of<AudioProvider>(context, listen: false).initMyAudioPlayer();
     super.initState();
   }
 
@@ -55,9 +58,11 @@ class _HomeScreenState extends State<HomeScreen> {
           child: CustomAppbar(isDarkTheme: widget.isDarkTheme),
         ),
         body: const TabBarView(children: categories),
+
         // bottom player
-        extendBody: true,
-        bottomSheet: const BottomNowPlayingTile(),
+
+        bottomNavigationBar:
+            BottomNowPlayingTile(isDarkTheme: widget.isDarkTheme),
       ),
     );
   }
