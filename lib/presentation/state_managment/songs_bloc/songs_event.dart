@@ -8,18 +8,29 @@ class FetchAllSongsEvent extends SongsEvent {
 }
 
 // play tapped song
-class PlayCurrentSongEvent extends SongsEvent {
+class GetCurrentSongEvent extends SongsEvent {
   final SongModel currentSong;
   final AudioPlayer audioPlayer;
+  final int songIndex;
 
-  PlayCurrentSongEvent({required this.currentSong, required this.audioPlayer});
+  GetCurrentSongEvent({
+    required this.currentSong,
+    required this.audioPlayer,
+    required this.songIndex,
+  });
 }
-
-class PlayNextSong extends SongsEvent {}
-
-class PlayPreviousSong extends SongsEvent {}
 
 class PlayPauseSong extends SongsEvent {
   final AudioPlayer audioPlayer;
   PlayPauseSong({required this.audioPlayer});
+}
+
+class PlayNextSong extends SongsEvent {
+  final AudioPlayer audioPlayer;
+  PlayNextSong({required this.audioPlayer});
+}
+
+class PlayPreviousSong extends SongsEvent {
+  final AudioPlayer audioPlayer;
+  PlayPreviousSong({required this.audioPlayer});
 }

@@ -9,9 +9,11 @@ class SongTileWidget extends StatelessWidget {
   const SongTileWidget({
     super.key,
     required this.song,
+    required this.index,
   });
 
   final SongModel song;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -21,38 +23,38 @@ class SongTileWidget extends StatelessWidget {
       padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
       child: GestureDetector(
         onTap: () {
-          //  final state = Provider.of<AudioProvider>(context, listen: false);
           //  play or pause the song which is  tapped right now
-          context.read<SongsBloc>().add(PlayCurrentSongEvent(
+          context.read<SongsBloc>().add(GetCurrentSongEvent(
                 currentSong: song,
                 audioPlayer: state.audioPlayer,
+                songIndex: index,
               ));
         },
         child: Container(
           padding: const EdgeInsets.all(15),
           decoration: BoxDecoration(
-            border: Border.all(
-                color: Theme.of(context).primaryColor.withOpacity(0.2)),
             borderRadius: BorderRadius.circular(20),
+            color: Theme.of(context).primaryColorLight,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(song.title,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                  )),
+              Text(
+                song.title,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
               const SizedBox(height: 5),
               // artist
               Row(
                 children: [
                   Expanded(
                       child: SizedBox(
-                    child: Text(song.artist ?? "",
-                        style: TextStyle(
-                          color:
-                              Theme.of(context).primaryColor.withOpacity(0.7),
-                        )),
+                    child: Text(
+                      song.artist ?? "",
+                      style: TextStyle(
+                        color: Theme.of(context).textTheme.titleSmall!.color,
+                      ),
+                    ),
                   )),
                 ],
               ),

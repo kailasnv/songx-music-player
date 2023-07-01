@@ -12,14 +12,26 @@ class BottomNowPlayingTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var prov = Provider.of<AudioProvider>(context, listen: false);
+
     return Container(
       width: double.infinity,
       height: 75,
       decoration: BoxDecoration(
-        color: isDarkTheme
-            ? Colors.black
-            : Theme.of(context).scaffoldBackgroundColor,
-        border: Border.all(color: Theme.of(context).primaryColor),
+        //  color: isDarkTheme
+        //      ? Colors.black
+        //      : Theme.of(context).scaffoldBackgroundColor,
+        border: Border(
+          top: BorderSide(color: Theme.of(context).primaryColor),
+        ),
+
+        gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Theme.of(context).primaryColor.withOpacity(0.2),
+              Colors.black,
+            ]),
       ),
       child: Row(
         children: [
@@ -27,13 +39,13 @@ class BottomNowPlayingTile extends StatelessWidget {
           Expanded(
             child: BlocBuilder<SongsBloc, SongsState>(
               builder: (context, state) {
-                if (state.previousSong != null) {
+                if (state.currentSong != null) {
                   return Row(
                     children: [
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: QueryArtworkWidget(
-                          id: state.previousSong!.id,
+                          id: state.currentSong!.id,
                           type: ArtworkType.AUDIO,
                           artworkFit: BoxFit.contain,
                           artworkBorder: BorderRadius.zero,
@@ -43,39 +55,45 @@ class BottomNowPlayingTile extends StatelessWidget {
                       Expanded(
                           child: SizedBox(
                               child: Text(
-                        state.previousSong!.title,
+                        state.currentSong!.title,
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
+                          color: Colors.white,
                         ),
                       ))),
                     ],
                   );
                 } else {
-                  return const Center(
-                    child: Text("Play Your Fav Song"),
-                  );
+                  return const Center(child: Text("Play any Song you like"));
                 }
               },
             ),
           ),
 
-          // play pause next previous part // TODO :
+          // PREVIOUS SONG
           IconButton(
-              onPressed: () {}, icon: const Icon(Icons.skip_previous_outlined)),
-
+            onPressed: () => context
+                .read<SongsBloc>()
+                .add(PlayPreviousSong(audioPlayer: prov.audioPlayer)),
+            icon: const Icon(Icons.skip_previous_outlined),
+          ),
+          // PLAY OR PAUSE
           BlocBuilder<SongsBloc, SongsState>(
             builder: (context, state) => IconButton(
                 onPressed: () {
-                  var prov = Provider.of<AudioProvider>(context, listen: false);
                   context
                       .read<SongsBloc>()
                       .add(PlayPauseSong(audioPlayer: prov.audioPlayer));
                 },
                 icon: Icon(state.isPlaying ? Icons.pause : Icons.play_arrow)),
           ),
-
+          //NEXT SONG
           IconButton(
-              onPressed: () {}, icon: const Icon(Icons.skip_next_outlined)),
+            onPressed: () => context
+                .read<SongsBloc>()
+                .add(PlayNextSong(audioPlayer: prov.audioPlayer)),
+            icon: const Icon(Icons.skip_next_outlined),
+          ),
         ],
       ),
     );

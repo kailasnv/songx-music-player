@@ -23,7 +23,7 @@ class TracksPage extends StatelessWidget {
               // this [song] will get me each individual songs
               final song = state.songModalList![index];
 
-              return SongTileWidget(song: song);
+              return SongTileWidget(song: song, index: index);
             },
           );
         } else {

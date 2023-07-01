@@ -41,8 +41,6 @@ class _HomeScreenState extends State<HomeScreen> {
   // list of all 4 page
   static const List<Widget> categories = [
     TracksPage(),
-    ArtistsPage(),
-    AlbumsPage(),
     PlaylistsPage(),
   ];
 

@@ -38,9 +38,7 @@ class CustomAppbar extends StatelessWidget {
       // bottom
       bottom: const TabBar(
         tabs: [
-          Tab(text: "Tracks"),
-          Tab(text: "Artists"),
-          Tab(text: "Albums"),
+          Tab(text: "All Tracks"),
           Tab(text: "Playlists"),
         ],
       ),

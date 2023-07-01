@@ -24,6 +24,7 @@ class ThemeColors {
     textTheme: const TextTheme(
       bodySmall: TextStyle(color: Colors.black),
       bodyMedium: TextStyle(color: Colors.black),
+      titleSmall: TextStyle(color: Colors.black), // used for sub title
     ),
     // tab bar
     tabBarTheme: const TabBarTheme(
@@ -33,7 +34,9 @@ class ThemeColors {
     ),
     iconTheme: const IconThemeData(color: Colors.black),
     // border color
-    primaryColor: Colors.black.withOpacity(0.3),
+    primaryColor: Colors.accents[9], // Colors.black.withOpacity(0.7),
+    // song tile color
+    primaryColorLight: Colors.accents[9],
   );
 
   /*
@@ -54,17 +57,19 @@ class ThemeColors {
     textTheme: const TextTheme(
       bodySmall: TextStyle(color: Colors.white),
       bodyMedium: TextStyle(color: Colors.white),
-      titleMedium: TextStyle(color: Colors.white),
+      titleSmall: TextStyle(color: Colors.teal),
     ),
     // tab bar
     tabBarTheme: const TabBarTheme(
       labelColor: Colors.white,
       indicatorColor: Colors.white,
       indicator:
-          BoxDecoration(border: Border(bottom: BorderSide(color: Colors.red))),
+          BoxDecoration(border: Border(bottom: BorderSide(color: Colors.teal))),
     ),
     iconTheme: const IconThemeData(color: Colors.white),
-    // border color
-    primaryColor: Colors.red,
+    // border color and sub title color
+    primaryColor: Colors.teal,
+    // song tile color
+    primaryColorLight: Colors.grey.shade900.withOpacity(0.6),
   );
 }
