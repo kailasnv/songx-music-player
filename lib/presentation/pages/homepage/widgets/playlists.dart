@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PlaylistsPage extends StatelessWidget {
   const PlaylistsPage({super.key});
 
+  //
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -15,17 +17,27 @@ class PlaylistsPage extends StatelessWidget {
             canShowMoreButton: false,
             onTap: () {},
           ),
-          ListView.builder(
-            itemCount: 15,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(color: Colors.amber, height: 45),
-              );
-            },
-          ),
+          // BlocBuilder<PlaylistBloc, PlaylistState>(
+          //   builder: (context, state) {
+          //     if (state.recentPlaylist.isNotEmpty) {
+          //       return ListView.builder(
+          //         itemCount: state.recentPlaylist.length,
+          //         shrinkWrap: true,
+          //         physics: const NeverScrollableScrollPhysics(),
+          //         itemBuilder: (context, index) {
+          //           final song = state.recentPlaylist[index];
+
+          //           return ListTile(
+          //             title: Text(song.title),
+          //             subtitle: Text(song.data),
+          //           );
+          //         },
+          //       );
+          //     } else {
+          //       return const Center(child: Text("No recent songs"));
+          //     }
+          //   },
+          // ),
         ],
       ),
     );
