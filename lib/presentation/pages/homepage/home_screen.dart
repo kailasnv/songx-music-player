@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:provider/provider.dart';
-import 'package:songx/presentation/pages/homepage/widgets/albums.dart';
-import 'package:songx/presentation/pages/homepage/widgets/artists.dart';
 import 'package:songx/presentation/pages/homepage/widgets/playlists.dart';
 import 'package:songx/presentation/pages/homepage/widgets/tracks.dart';
-import 'package:just_audio/just_audio.dart';
 import 'package:songx/presentation/state_managment/player_provider/audio_player_prov.dart';
 
 import '../../../utils/permission.dart';
