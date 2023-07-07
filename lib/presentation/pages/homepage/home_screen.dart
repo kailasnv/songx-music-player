@@ -35,6 +35,12 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
   }
 
+  @override
+  void dispose() {
+    Provider.of<AudioProvider>(context, listen: false).dispose();
+    super.dispose();
+  }
+
   // list of all 4 page
   static const List<Widget> categories = [
     TracksPage(),

@@ -16,12 +16,12 @@ class TracksPage extends StatelessWidget {
         if (state.isLoading) {
           return const Center(child: CircularProgressIndicator());
         }
-        if (state.songModalList != null) {
+        if (state.allTracksPlaylist != null) {
           return ListView.builder(
-            itemCount: state.songModalList!.length,
+            itemCount: state.allTracksPlaylist!.length,
             itemBuilder: (context, index) {
               // this [song] will get me each individual songs
-              final song = state.songModalList![index];
+              final song = state.allTracksPlaylist![index];
 
               return SongTileWidget(song: song, index: index);
             },

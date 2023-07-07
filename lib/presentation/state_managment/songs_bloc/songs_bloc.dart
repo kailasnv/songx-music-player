@@ -20,7 +20,7 @@ class SongsBloc extends Bloc<SongsEvent, SongsState> {
 
       emit(SongsState(
         isLoading: false,
-        songModalList: songs, //update the list of songs
+        allTracksPlaylist: songs, //update the main list of songs
         isPlaying: false,
       ));
     });
@@ -34,7 +34,7 @@ class SongsBloc extends Bloc<SongsEvent, SongsState> {
         emit(SongsState(
           isLoading: false,
           currentSong: event.currentSong, // updating current song
-          songModalList: state.songModalList,
+          allTracksPlaylist: state.allTracksPlaylist,
           isPlaying: true, // before play method , updating this to true
           songIndex: event.songIndex,
         ));
@@ -53,8 +53,8 @@ class SongsBloc extends Bloc<SongsEvent, SongsState> {
           emit(SongsState(
             isLoading: false,
             currentSong:
-                event.currentSong, // updating current song drom user event
-            songModalList: state.songModalList,
+                event.currentSong, // updating current song from user event
+            allTracksPlaylist: state.allTracksPlaylist,
             isPlaying: false,
             songIndex: state.songIndex,
           ));
@@ -64,7 +64,7 @@ class SongsBloc extends Bloc<SongsEvent, SongsState> {
           emit(SongsState(
             isLoading: false,
             currentSong: event.currentSong, // updating current song
-            songModalList: state.songModalList,
+            allTracksPlaylist: state.allTracksPlaylist,
             isPlaying: true,
             songIndex: event.songIndex,
           ));
@@ -86,7 +86,7 @@ class SongsBloc extends Bloc<SongsEvent, SongsState> {
           isLoading: false,
           isPlaying: false,
           currentSong: state.currentSong,
-          songModalList: state.songModalList,
+          allTracksPlaylist: state.allTracksPlaylist,
           songIndex: state.songIndex,
         ));
         await audioPlayer.pause();
@@ -95,7 +95,7 @@ class SongsBloc extends Bloc<SongsEvent, SongsState> {
           isLoading: false,
           isPlaying: true,
           currentSong: state.currentSong,
-          songModalList: state.songModalList,
+          allTracksPlaylist: state.allTracksPlaylist,
           songIndex: state.songIndex,
         ));
         await audioPlayer.play();
@@ -109,8 +109,8 @@ class SongsBloc extends Bloc<SongsEvent, SongsState> {
         emit(SongsState(
           isLoading: false,
           isPlaying: state.isPlaying,
-          songModalList: state.songModalList,
-          currentSong: state.songModalList![
+          allTracksPlaylist: state.allTracksPlaylist,
+          currentSong: state.allTracksPlaylist![
               state.songIndex! + 1], // updating current song by +1
           songIndex: state.songIndex! + 1, //also updating song index by + 1
         ));
@@ -130,8 +130,8 @@ class SongsBloc extends Bloc<SongsEvent, SongsState> {
         emit(SongsState(
           isLoading: false,
           isPlaying: state.isPlaying,
-          songModalList: state.songModalList,
-          currentSong: state.songModalList![state.songIndex! - 1],
+          allTracksPlaylist: state.allTracksPlaylist,
+          currentSong: state.allTracksPlaylist![state.songIndex! - 1],
           songIndex: state.songIndex! - 1,
         ));
 

@@ -45,7 +45,7 @@ class ThemeColors {
   static final darkTheme = ThemeData(
     //scaffold
     scaffoldBackgroundColor: Colors.black,
-    primarySwatch: Colors.red,
+    primarySwatch: Colors.teal,
 
     // appbar
     appBarTheme: const AppBarTheme(

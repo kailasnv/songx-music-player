@@ -2,14 +2,14 @@ part of 'songs_bloc.dart';
 
 class SongsState {
   final bool isLoading;
-  final List<SongModel>? songModalList;
+  final List<SongModel>? allTracksPlaylist;
   final SongModel? currentSong;
   final bool isPlaying;
   final int? songIndex;
 
   SongsState({
     required this.isLoading,
-    this.songModalList,
+    this.allTracksPlaylist,
     this.currentSong,
     required this.isPlaying,
     this.songIndex,
