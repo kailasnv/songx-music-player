@@ -12,8 +12,6 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // initialize hive
   await Hive.initFlutter();
-  // open a hive box
-  await Hive.openBox("myBox");
 
   runApp(MultiProvider(
     providers: [
@@ -30,7 +28,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => ThemeCubit()),
+        BlocProvider(create: (context) => ThemeCubit()), // manages theme
         BlocProvider(create: (context) => SongsBloc()),
       ],
       child: BlocBuilder<ThemeCubit, ThemeState>(

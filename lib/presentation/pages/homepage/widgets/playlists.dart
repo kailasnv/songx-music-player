@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PlaylistsPage extends StatelessWidget {
   const PlaylistsPage({super.key});
@@ -10,31 +9,56 @@ class PlaylistsPage extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          // grid of recent playlist  / show more or show less button
+          // fav songs list
 
-          // recent played songs
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: Container(
+              height: 60,
+              padding: const EdgeInsets.all(15),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Theme.of(context).primaryColorLight,
+              ),
+              child: Center(
+                  child: Row(
+                children: const [
+                  Text("Favorite Songs",
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  CircleAvatar(
+                    backgroundColor: Colors.white,
+                    child: Text("2",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        )),
+                  ),
+                ],
+              )),
+            ),
+          ),
+
+          // recent played songs list
           HeadingTitleWidget(
+            title: "Recent Played Songs",
             canShowMoreButton: false,
             onTap: () {},
           ),
-          // BlocBuilder<PlaylistBloc, PlaylistState>(
-          //   builder: (context, state) {
-          //     if (state.recentPlaylist.isNotEmpty) {
+          // Consumer<Database>(
+          //   builder: (context, state, _) {
+          //     if (state.favoriteSongList.isNotEmpty) {
           //       return ListView.builder(
-          //         itemCount: state.recentPlaylist.length,
           //         shrinkWrap: true,
           //         physics: const NeverScrollableScrollPhysics(),
+          //         itemCount: state.favoriteSongList.length,
           //         itemBuilder: (context, index) {
-          //           final song = state.recentPlaylist[index];
+          //           var song = state.favoriteSongList[index];
 
-          //           return ListTile(
-          //             title: Text(song.title),
-          //             subtitle: Text(song.data),
-          //           );
+          //           return ListTile(title: Text(song.title));
           //         },
           //       );
           //     } else {
-          //       return const Center(child: Text("No recent songs"));
+          //       return const Text("No Recent Songs.");
           //     }
           //   },
           // ),
@@ -49,7 +73,10 @@ class HeadingTitleWidget extends StatelessWidget {
     super.key,
     required this.canShowMoreButton,
     required this.onTap,
+    required this.title,
   });
+
+  final String title;
   final bool canShowMoreButton;
   final void Function()? onTap;
   static const style = TextStyle(fontWeight: FontWeight.bold, fontSize: 12);
@@ -62,7 +89,7 @@ class HeadingTitleWidget extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text("Recent Played Songs", style: style),
+            Text(title, style: style),
             canShowMoreButton
                 ? GestureDetector(
                     onTap: onTap,
