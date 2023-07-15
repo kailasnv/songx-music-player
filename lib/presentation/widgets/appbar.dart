@@ -19,7 +19,7 @@ class CustomAppbar extends StatelessWidget {
             fontSize: 22,
           )),
       actions: [
-        // update theme mode button
+        // button for - change theme modes
         IconButton(
           onPressed: () {
             context.read<ThemeCubit>().updataTheme();
@@ -35,14 +35,12 @@ class CustomAppbar extends StatelessWidget {
         ),
         // */
       ],
-      // bottom
       bottom: const TabBar(
         tabs: [
           Tab(text: "All Tracks"),
-          Tab(text: "Playlists"),
+          Tab(text: "Favorite"),
         ],
       ),
-      // */
     );
   }
 }

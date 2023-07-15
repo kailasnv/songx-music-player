@@ -34,3 +34,16 @@ class PlayPreviousSong extends SongsEvent {
   final AudioPlayer audioPlayer;
   PlayPreviousSong({required this.audioPlayer});
 }
+
+// Like or UnLike song
+class AddToFavEvent extends SongsEvent {
+  final SongModel currentSong;
+  final BuildContext context;
+  AddToFavEvent({
+    required this.currentSong,
+    required this.context,
+  });
+}
+
+// get all songs from HIVE db
+class FetchFavoritePlaylistEvent extends SongsEvent {}

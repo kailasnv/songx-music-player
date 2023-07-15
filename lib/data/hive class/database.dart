@@ -1,20 +1,25 @@
-import 'package:flutter/material.dart';
-import 'package:on_audio_query/on_audio_query.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:songx/presentation/state_managment/songs_bloc/songs_bloc.dart';
 
-// class Database extends ChangeNotifier {
-//   // list of fav songs
-//   List<SongModel> favoriteSongList = [];
-//   List<SongModel> recentSongList = [];
+class Database {
+  // temporary variable to store data , and to upload to hive
+  List<int> favIDs = [];
 
-//   addToRecent(SongModel currentSong) {
-//     recentSongList.add(currentSong);
-//     notifyListeners();
-//   }
+  // open hive db ref
+  final myBox = Hive.box("favorite");
 
-//   // add to fav method
-//   addToFavorite(SongModel newSong) {
-//     print("adding to fav list ");
-//     favoriteSongList.add(newSong);
-//     notifyListeners();
-//   }
-// }
+  // this will give all data from HIVE
+  loadDataFromHive() {
+    if (myBox.get("FAV_KEY") != null) {
+      favIDs = myBox.get("FAV_KEY");
+    }
+  }
+
+  // add or remove from database
+  updateDatabase(SongsState state) async {
+    for (var i = 0; i < state.favoritePlaylist.length; i++) {
+      favIDs.add(state.favoritePlaylist[i].id);
+    }
+    await myBox.put("FAV_KEY", favIDs);
+  }
+}

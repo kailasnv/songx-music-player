@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:provider/provider.dart';
-import 'package:songx/data/hive%20class/database.dart';
+import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:songx/presentation/state_managment/player_provider/audio_player_prov.dart';
 
 import '../../state_managment/songs_bloc/songs_bloc.dart';
@@ -23,7 +23,7 @@ class PlayerScreen extends StatelessWidget {
             fit: StackFit.expand,
             alignment: AlignmentDirectional.center,
             children: [
-              // just for a gradient shade
+              //this Container is for just for a gradient shade
               Container(
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
@@ -34,7 +34,7 @@ class PlayerScreen extends StatelessWidget {
                       Colors.black,
                     ])),
               ),
-              //  a shade of song image as background
+              //  a image of current playing song  as background
               Opacity(
                 opacity: 0.2,
                 child: _buildSongImageBox(size, context),
@@ -44,25 +44,24 @@ class PlayerScreen extends StatelessWidget {
                   filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
                   child: Container()),
 
-              // MAIN contents or Main Column
+              // MAIN contents of page   or Main Column
               Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    // Back arrrow buttons
+                    // Back arrrow button / POP page
                     Padding(
                       padding: const EdgeInsets.only(right: 14),
                       child: IconButton(
-                        onPressed: () => Navigator.of(context).pop(),
-                        icon: const Icon(Icons.keyboard_arrow_down_rounded,
-                            size: 45),
-                      ),
+                          onPressed: () => Navigator.of(context).pop(),
+                          icon: const Icon(Icons.keyboard_arrow_down_rounded,
+                              size: 45)),
                     ),
-                    // song thumbnail box
+                    // Cover image of song
                     _buildSongImageBox(size, context),
 
                     // song title , artists name
                     Container(
-                      height: 100,
+                      height: 150,
                       width: double.infinity,
                       padding: const EdgeInsets.all(10),
                       child: BlocBuilder<SongsBloc, SongsState>(
@@ -91,10 +90,18 @@ class PlayerScreen extends StatelessWidget {
                                 // Heart button - add song to fav
                                 IconButton(
                                     onPressed: () {
-                                      // todo TODO
+                                      context
+                                          .read<SongsBloc>()
+                                          .add(AddToFavEvent(
+                                            currentSong: state.currentSong!,
+                                            context: context,
+                                          ));
                                     },
-                                    icon: const Icon(
-                                      Icons.favorite_border,
+                                    icon: Icon(
+                                      state.favoritePlaylist
+                                              .contains(state.currentSong)
+                                          ? Icons.favorite
+                                          : Icons.favorite_border,
                                       color: Colors.white,
                                     )),
                               ],
@@ -105,15 +112,29 @@ class PlayerScreen extends StatelessWidget {
                         },
                       ),
                     ),
-                    // song progres slider  TODO :
-                    const Divider(
-                      thickness: 3,
-                      color: Colors.white,
-                      indent: 15,
-                      endIndent: 15,
-                    ),
-                    // play pause action buttons
+                    // song progres slider
+                    StreamBuilder(
+                      stream: prov.positionDataStream,
+                      builder: (context, snapshot) {
+                        final positionData = snapshot.data;
 
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 25),
+                          child: ProgressBar(
+                            progress: positionData?.position ?? Duration.zero,
+                            buffered: positionData?.position ?? Duration.zero,
+                            total: positionData?.duration ?? Duration.zero,
+                            onSeek: prov.audioPlayer.seek,
+                            // apperance
+                            barHeight: 3,
+                            progressBarColor: Colors.white,
+                            thumbColor: Theme.of(context).primaryColor,
+                          ),
+                        );
+                      },
+                    ),
+
+                    //   THE 3 SONG EVENTS
                     Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -128,26 +149,23 @@ class PlayerScreen extends StatelessWidget {
                               )),
                           // PLAY OR PAUSE
                           CircleAvatar(
+                              radius: 30,
                               child: BlocBuilder<SongsBloc, SongsState>(
-                            builder: (context, state) {
-                              if (state.currentSong != null) {
-                                return IconButton(
-                                    onPressed: () {
-                                      //calling event
-                                      context.read<SongsBloc>().add(
-                                          PlayPauseSong(
-                                              audioPlayer: prov.audioPlayer));
-                                    },
-                                    icon: Icon(
-                                      state.isPlaying
-                                          ? Icons.pause
-                                          : Icons.play_arrow,
-                                    ));
-                              } else {
-                                return const Icon(Icons.hourglass_empty);
-                              }
-                            },
-                          )),
+                                builder: (context, state) {
+                                  return IconButton(
+                                      onPressed: () {
+                                        //calling event
+                                        context.read<SongsBloc>().add(
+                                            PlayPauseSong(
+                                                audioPlayer: prov.audioPlayer));
+                                      },
+                                      icon: Icon(
+                                        state.isPlaying
+                                            ? Icons.pause
+                                            : Icons.play_arrow,
+                                      ));
+                                },
+                              )),
                           //NEXT SONG
                           IconButton(
                               onPressed: () => context.read<SongsBloc>().add(
@@ -177,6 +195,8 @@ class PlayerScreen extends StatelessWidget {
       builder: (context, state) {
         if (state.currentSong != null) {
           return Container(
+            height: size.height * 0.4,
+            width: size.width * 0.8,
             decoration: BoxDecoration(boxShadow: [
               BoxShadow(
                 blurRadius: 30,
@@ -189,6 +209,7 @@ class PlayerScreen extends StatelessWidget {
               id: state.currentSong!.id,
               type: ArtworkType.AUDIO,
               artworkFit: BoxFit.cover,
+              keepOldArtwork: true,
               artworkBorder: BorderRadius.circular(10),
               nullArtworkWidget: _noThumbNailBox(size, context),
             ),

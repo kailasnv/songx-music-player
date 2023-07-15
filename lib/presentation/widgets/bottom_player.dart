@@ -18,8 +18,8 @@ class BottomNowPlayingTile extends StatelessWidget {
 
     return BlocBuilder<SongsBloc, SongsState>(builder: (context, state) {
       return GestureDetector(
-        // go to song controll panel page
         onTap: () {
+          // go to song player page
           if (state.currentSong != null) {
             Navigator.of(context).push(
               SlidePageRoute(child: const PlayerScreen()),
@@ -54,6 +54,7 @@ class BottomNowPlayingTile extends StatelessWidget {
                             child: QueryArtworkWidget(
                               id: state.currentSong!.id,
                               type: ArtworkType.AUDIO,
+                              keepOldArtwork: true,
                               artworkFit: BoxFit.contain,
                               artworkBorder: BorderRadius.zero,
                               nullArtworkWidget: const SizedBox(),
@@ -78,7 +79,7 @@ class BottomNowPlayingTile extends StatelessWidget {
                   },
                 ),
               ),
-
+              /*             - SONGS EVENTS -             */
               // PREVIOUS SONG
               IconButton(
                 onPressed: () => context
@@ -89,9 +90,12 @@ class BottomNowPlayingTile extends StatelessWidget {
               // PLAY OR PAUSE
               IconButton(
                   onPressed: () {
-                    context
-                        .read<SongsBloc>()
-                        .add(PlayPauseSong(audioPlayer: prov.audioPlayer));
+                    // checking this for - Not to call event if there is no current song
+                    if (state.currentSong != null) {
+                      context
+                          .read<SongsBloc>()
+                          .add(PlayPauseSong(audioPlayer: prov.audioPlayer));
+                    }
                   },
                   icon: Icon(state.isPlaying ? Icons.pause : Icons.play_arrow)),
               //NEXT SONG

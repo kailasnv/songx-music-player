@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:provider/provider.dart';
-import 'package:songx/presentation/pages/homepage/widgets/playlists.dart';
+import 'package:songx/presentation/pages/homepage/widgets/favorite.dart';
 import 'package:songx/presentation/pages/homepage/widgets/tracks.dart';
 import 'package:songx/presentation/state_managment/player_provider/audio_player_prov.dart';
 
@@ -28,10 +28,17 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     _audioQuery = OnAudioQuery();
     requestStoragePermission(_audioQuery);
+
+    // get all tracks from mobile storage
     BlocProvider.of<SongsBloc>(context)
         .add(FetchAllSongsEvent(audioQuery: _audioQuery));
+
     // init the audio player
     Provider.of<AudioProvider>(context, listen: false).initMyAudioPlayer();
+
+    // get all favorite songs from hive db
+    BlocProvider.of<SongsBloc>(context).add(FetchFavoritePlaylistEvent());
+
     super.initState();
   }
 
@@ -44,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
   // list of all 4 page
   static const List<Widget> categories = [
     TracksPage(),
-    PlaylistsPage(),
+    FavoritePage(),
   ];
 
   @override

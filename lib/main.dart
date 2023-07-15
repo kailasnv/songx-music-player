@@ -12,6 +12,8 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // initialize hive
   await Hive.initFlutter();
+  await Hive.openBox("favorite"); // Fav songs
+  await Hive.openBox("theme"); // theme mode ?
 
   runApp(MultiProvider(
     providers: [
@@ -29,7 +31,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => ThemeCubit()), // manages theme
-        BlocProvider(create: (context) => SongsBloc()),
+        BlocProvider(create: (context) => SongsBloc()), // manages songs
       ],
       child: BlocBuilder<ThemeCubit, ThemeState>(
         builder: (context, state) {

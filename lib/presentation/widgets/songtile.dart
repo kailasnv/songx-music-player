@@ -23,7 +23,7 @@ class SongTileWidget extends StatelessWidget {
       padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
       child: GestureDetector(
         onTap: () {
-          //  play or pause the song which is  tapped right now
+          //  play or pause the song which is tapped right now
           context.read<SongsBloc>().add(GetCurrentSongEvent(
                 currentSong: song,
                 audioPlayer: state.audioPlayer,
@@ -45,19 +45,15 @@ class SongTileWidget extends StatelessWidget {
               ),
               const SizedBox(height: 5),
               // artist
-              Row(
-                children: [
-                  Expanded(
-                      child: SizedBox(
-                    child: Text(
-                      song.artist ?? "",
+              Row(children: [
+                Expanded(
+                    child: SizedBox(
+                  child: Text(song.artist ?? "",
                       style: TextStyle(
                         color: Theme.of(context).textTheme.titleSmall!.color,
-                      ),
-                    ),
-                  )),
-                ],
-              ),
+                      )),
+                )),
+              ]),
             ],
           ),
         ),
