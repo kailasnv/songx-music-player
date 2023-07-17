@@ -5,9 +5,8 @@ import 'package:provider/provider.dart';
 import 'package:songx/presentation/pages/homepage/widgets/favorite.dart';
 import 'package:songx/presentation/pages/homepage/widgets/tracks.dart';
 import 'package:songx/presentation/state_managment/player_provider/audio_player_prov.dart';
-import 'package:songx/presentation/state_managment/theme_state/theme_cubit.dart';
 
-import '../../../utils/permission.dart';
+import '../../../domain/repo/permission.dart';
 import '../../state_managment/songs_bloc/songs_bloc.dart';
 import '../../widgets/appbar.dart';
 import '../../widgets/bottom_player.dart';
@@ -23,23 +22,22 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   //
   //instance of OnAudioQuery class
-  late final OnAudioQuery _audioQuery;
+  final OnAudioQuery _audioQuery = OnAudioQuery();
 
   @override
   void initState() {
-    _audioQuery = OnAudioQuery();
-    requestStoragePermission(_audioQuery);
+    requestStoragePermission(_audioQuery).then((value) {
+      //after getting permission, call events
+      // get all tracks from mobile storage
+      BlocProvider.of<SongsBloc>(context)
+          .add(FetchAllSongsEvent(audioQuery: _audioQuery));
 
-    // get all tracks from mobile storage
-    BlocProvider.of<SongsBloc>(context)
-        .add(FetchAllSongsEvent(audioQuery: _audioQuery));
+      // init the audio player
+      Provider.of<AudioProvider>(context, listen: false).initMyAudioPlayer();
 
-    // init the audio player
-    Provider.of<AudioProvider>(context, listen: false).initMyAudioPlayer();
-
-    // get all favorite songs from hive db
-    BlocProvider.of<SongsBloc>(context).add(FetchFavoritePlaylistEvent());
-
+      // get all favorite songs from hive db
+      BlocProvider.of<SongsBloc>(context).add(FetchFavoritePlaylistEvent());
+    });
     super.initState();
   }
 
@@ -57,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print("home page build called..");
+    // print("home page build called..");
 
     return DefaultTabController(
       length: categories.length,

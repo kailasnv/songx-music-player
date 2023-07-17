@@ -164,7 +164,7 @@ class SongsBloc extends Bloc<SongsEvent, SongsState> {
 
       var song = event.currentSong;
 
-      print("adding  ${song.title}  to fav playlist");
+      // print("adding  ${song.title}  to fav playlist");
 
       // if this song already containes , then REMOVE it from FAV list
       if (state.favoritePlaylist.contains(song)) {
@@ -212,7 +212,7 @@ class SongsBloc extends Bloc<SongsEvent, SongsState> {
       Database db = Database();
       db.loadDataFromHive();
 
-      print("favSongsIDs = ${db.favIDs.toString()}");
+      //  print("favSongsIDs = ${db.favIDs.toString()}");
 
       // this will give me some time to Fill up data in  allTracksPlaylist..
       await Future.delayed(const Duration(seconds: 2));
