@@ -1,16 +1,22 @@
 # songx
 
-A new Flutter project.
+A Music Player App made using Flutter.
 
 ## Getting Started
+This is a simple Music App made using pure Flutter. We can play any music files which is downloaded in our mobile device.
+Also we can add songs to Favorite playlist and also remove from it. It have features like LightMode and DarkMode , also i have implimented Hive local database to store some data like - all favorite songs id & ThemeMode(dark/light) data. 
 
-This project is a starting point for a Flutter application.
+## Dependencies & Packages used
 
-A few resources to get you started if this is your first Flutter project:
+  audio_video_progress_bar: ^1.0.1
+  bloc: ^8.1.2
+  flutter_bloc: ^8.1.3
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  just_audio: ^0.9.34
+  on_audio_query: ^2.9.0
+  provider: ^6.0.5
+  rxdart: ^0.27.5
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+  # here are some screenshots
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
