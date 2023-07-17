@@ -21,4 +21,5 @@ Also we can add songs to Favorite playlist and also remove from it. It have feat
 
 
   ##### here are some screenshots
+  <img src="![songx](https://github.com/kailasnv/songx-music-player/assets/130171990/1e3074b9-f917-490f-b980-eeb0805b5394)" width="50%" height="50%">
 
