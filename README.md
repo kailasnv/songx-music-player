@@ -17,6 +17,8 @@ Also we can add songs to Favorite playlist and also remove from it. It have feat
  7. on_audio_query: ^2.9.0
  8. provider: ^6.0.5
  9. rxdart: ^0.27.5
+ 10. flutter_launcher_icons: ^0.13.1
+
 
   ##### here are some screenshots
 
