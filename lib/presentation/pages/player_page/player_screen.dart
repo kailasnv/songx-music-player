@@ -129,6 +129,8 @@ class PlayerScreen extends StatelessWidget {
                             barHeight: 3,
                             progressBarColor: Colors.white,
                             thumbColor: Theme.of(context).primaryColor,
+                            timeLabelTextStyle:
+                                const TextStyle(color: Colors.white),
                           ),
                         );
                       },

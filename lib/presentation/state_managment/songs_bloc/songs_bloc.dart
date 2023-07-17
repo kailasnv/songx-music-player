@@ -214,7 +214,7 @@ class SongsBloc extends Bloc<SongsEvent, SongsState> {
 
       print("favSongsIDs = ${db.favIDs.toString()}");
 
-      // this will give me some time to Fill up data in  allTracksPlaylist
+      // this will give me some time to Fill up data in  allTracksPlaylist..
       await Future.delayed(const Duration(seconds: 2));
 
       // checking fav songs...

@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:songx/presentation/pages/homepage/widgets/favorite.dart';
 import 'package:songx/presentation/pages/homepage/widgets/tracks.dart';
 import 'package:songx/presentation/state_managment/player_provider/audio_player_prov.dart';
+import 'package:songx/presentation/state_managment/theme_state/theme_cubit.dart';
 
 import '../../../utils/permission.dart';
 import '../../state_managment/songs_bloc/songs_bloc.dart';

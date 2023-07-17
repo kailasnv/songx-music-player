@@ -26,11 +26,23 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  bool loadThemeFromDB() {
+    final myThemeBox = Hive.box("theme");
+
+    if (myThemeBox.get("THEME_KEY") != null) {
+      final bool theme = myThemeBox.get("THEME_KEY");
+      return theme;
+    }
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => ThemeCubit()), // manages theme
+        BlocProvider(
+            create: (context) =>
+                ThemeCubit(lastTheme: loadThemeFromDB())), // manages theme
         BlocProvider(create: (context) => SongsBloc()), // manages songs
       ],
       child: BlocBuilder<ThemeCubit, ThemeState>(

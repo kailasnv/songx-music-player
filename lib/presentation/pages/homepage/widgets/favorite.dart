@@ -18,6 +18,7 @@ class FavoritePage extends StatelessWidget {
         if (state.favoritePlaylist.isNotEmpty) {
           return ListView.builder(
             itemCount: state.favoritePlaylist.length,
+            shrinkWrap: true,
             itemBuilder: (context, index) {
               // this [song] will get me each individual songs
               final song = state.favoritePlaylist[index];
