@@ -33,7 +33,7 @@ class SongTileWidget extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(15),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(15),
             color: Theme.of(context).primaryColorLight,
           ),
           child: Column(
