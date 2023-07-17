@@ -3,8 +3,9 @@
 A Music Player App made using Flutter.
 
 ## Getting Started
-This is a simple Music App made using pure Flutter. We can play any music files which is downloaded in our mobile device.
+This is a simple Music App made using pure Flutter, which allows users to play music from internal storage of their Mobile device. Users can list all songs from local storage, and it has majority of the functionalities of an offline music player such as Play/Pause,skip-next & skip-previous.
 Also we can add songs to Favorite playlist and also remove from it. It have features like LightMode and DarkMode , also i have implimented Hive local database to store some data like - all favorite songs id & ThemeMode(dark/light) data. 
+State management done with Bloc and Provider.
 
 #### Dependencies & Packages used
 
