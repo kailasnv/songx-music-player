@@ -218,8 +218,8 @@ class SongsBloc extends Bloc<SongsEvent, SongsState> {
       await Future.delayed(const Duration(seconds: 2));
 
       // checking fav songs...
-      if (state.allTracksPlaylist != null) {
-        for (var i = 0; i < state.allTracksPlaylist!.length; i++) {
+      if (state.allTracksPlaylist != null && db.favIDs.isNotEmpty) {
+        for (var i = 0; i < db.favIDs.length; i++) {
           for (var j = 0; j < state.allTracksPlaylist!.length; j++) {
             // if ids are same. add that song to favoritePlaylist
 

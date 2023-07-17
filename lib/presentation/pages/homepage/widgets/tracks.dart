@@ -26,8 +26,13 @@ class TracksPage extends StatelessWidget {
               return SongTileWidget(song: song, index: index);
             },
           );
-        } else {
+        } else if (state.allTracksPlaylist != null &&
+            state.allTracksPlaylist!.isEmpty) {
+          // is no songs in device..
           return const Center(child: Text("No Songs Found."));
+        } else {
+          return const Center(
+              child: CircularProgressIndicator(color: Colors.white));
         }
       },
     );
